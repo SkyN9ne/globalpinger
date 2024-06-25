@@ -16,10 +16,10 @@ Everyone is welcome to contribute – here are some ways you can get involved:
 - Contribute to the documentation.
 - Write tutorials and articles and help spread the word about Globalping on your blog or other platforms.
 
-Refer to [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+Refer to [`CONTRIBUTING.md`](CONTRIBUTING.md) for more information.
 
 ## The Globalping Platform
-Globalping allows anyone to run networking commands such as ping, traceroute, dig, and mtr on probes distributed around the globe. Our goal is to provide a free, user-friendly API for everyone to build interesting networking tools and services.
+Globalping allows anyone to run networking commands such as `ping`, `traceroute`,`dig` and `mtr` on probes distributed around the globe. Our goal is to provide a free, user-friendly API for everyone to build interesting networking tools and services.
 
 Many users will likely prefer alternative ways to use the platform rather than working directly with the API. Therefore, to make Globalping accessible to all kinds of users, we're constantly expanding and improving our tools, all of which leverage the full potential of the Globalping API:
 
@@ -31,7 +31,7 @@ Many users will likely prefer alternative ways to use the platform rather than w
 
 Learn more about Globalping on [www.jsdelivr.com/globalping](https://www.jsdelivr.com/globalping)
 
-## Our major sponsors
+#### Our major sponsors
 We thank our sponsors who contribute to the development of Globalping and help us expand our probe network!
 
 | <img src="https://gcore.com/favicon.ico" width="15" height="15"> [Gcore](https://gcore.com) | <img src="https://xtom.com/favicon.ico" width="15" height="15"> [xTom](https://xtom.com) | <img src="https://www.edisglobal.com/favicon.png" width="15" height="15"> [Edis Global](https://www.edisglobal.com) |
@@ -58,26 +58,39 @@ Upgrade your network debugging capabilities by installing the Globalping CLI too
 
 Install the CLI on Linux, macOS, or Windows using the command for your package manager:
 
-```
-#Ubuntu
+-------------------------------
+
+- **Ubuntu**
+
+```bash
 curl -s https://packagecloud.io/install/repositories/jsdelivr/globalping/script.deb.sh | sudo bash
 apt install globalping
+```
+- **RHEL**
 
-#RHEL
+```bash
 curl -s https://packagecloud.io/install/repositories/jsdelivr/globalping/script.rpm.sh | sudo bash
 dnf install globalping
+```
+- **MacOS**
 
-#MacOS
+```bash
 brew tap jsdelivr/globalping
 brew install globalping
+```
 
-#Windows
+**Windows**
+
+```pwsh
 winget install globalping
-OR
+```
+Or if you have Chocolatey installed and prefer it 
+
+```pwsh
 choco install globalping
 ```
 
-And then run your tests:
+## Then run your tests:
 
 ```
 $ globalping traceroute google.com from Western Europe --limit 2
@@ -99,12 +112,12 @@ traceroute to google.com (142.250.185.78), 20 hops max, 60 byte packets
 
 Learn more about the Globalping CLI [in its repository](https://github.com/jsdelivr/globalping-cli)
 
-### Globalping REST API
-If you want to build something custom or simply learn more about all the available options and data we provide, check out the Globalping REST API.
+## Globalping REST API
+If you want to build something custom or simply learn more about all the available options and data we provide, check out the Globalping REST API
 
 Creating a new measurement test is as simple as:
 
-```
+```json
 POST https://api.globalping.io/v1/measurements
 {
     "limit": 10,
@@ -120,7 +133,7 @@ POST https://api.globalping.io/v1/measurements
 [Read the full API documentation](https://www.jsdelivr.com/docs/api.globalping.io) and [explore our dev demo](https://api.globalping.io/demo/)
 
 
-### Slack App
+## Slack App
 Improve collaboration in your workspace by installing our Slack app, enabling everyone to interact with Globalping without leaving Slack. The app is especially handy for NOC, OPS, and Support teams collaborating on debugging networking issues and discussing results.
 
 <a href="https://bots.globalping.io/slack/install"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
@@ -128,8 +141,8 @@ Improve collaboration in your workspace by installing our Slack app, enabling ev
 To initiate a command with the Globalping Slack app, use the slash command `/globalping`. Apart from that, you can use the same test command structure as with our other tools and integrations. For example, to get started, type `/globalping help`.
 
 Example commands to try:
-```
 
+```slack
 /globalping ping 8.8.8.8 from Germany
 
 /globalping traceroute jsdelivr.com from South America --limit 2
@@ -145,7 +158,8 @@ Learn more about the Slack app [on our blog](https://www.jsdelivr.com/blog/netwo
 Automatically post network test results into any **public** GitHub issue with our GitHub bot. Mention it with `@globalping`, followed by the command you want to run. Otherwise, you can follow the same test command structure as with our other tools and integrations.
 
 Example commands to try:
-```
+
+```bash
 @globalping ping 8.8.8.8 from Germany
 @globalping traceroute jsdelivr.com from South America --limit 2
 ```
@@ -159,22 +173,26 @@ Follow this structure when writing measurement commands:
 
 `globalping [command] [target] from [location] [flags]`
 
-Examples:
+**Examples**:
 - `globalping ping google.com from aws`
 - `globalping ping google.com from Berlin, South America --limit 2`
 
-Let's look at the components:
-##### Available test types
-Globalping supports the following:
-- ping
-- traceroute
-- mtr
-- dns (similar to dig)
-- http (similar to curl GET and HEAD)
-##### Target
+
+## Available test types
+Globalping supports the following components / commands:
+- `ping`
+- `traceroute`
+- `mtr`
+- `dns` (similar to `dig`)
+- `http` (similar to `curl` `GET` and `HEAD`)
+
+
+### Target
 The target represents the destination for your test. This can be a domain name or an IP address for most test types.
+
+
 ##### Location
-The location field can process different locations, including continents, regions, countries, cities, US states, and ASNs (prefixed by "AS," e.g., `from AS80085`). You can also specify measurement IDs from previous tests to reuse the same probes.
+The location field can process different locations, including continents, regions, countries, cities, US states, and ASNs (prefixed by `AS` e.g., `from AS80085`). You can also specify measurement IDs from previous tests to reuse the same probes.
 >[!TIP]
 >Check out our [best pracises and tips](#basic-location-targeting-) to learn how to define locations effectively.
 
@@ -318,7 +336,7 @@ Notes on probe security and customization
 - We rate-limited all users on the API level to prevent the abuse of the network.
 - No local network tests are allowed, only public endpoints.
 
-Learn more in the [Globalping Probe respository](https://github.com/jsdelivr/globalping-probe).
+Learn more in the [`Globalping-@Probe` respository](https://github.com/jsdelivr/globalping-probe).
 
 ## Limits | WIP
 Our platform has multiple limits to prevent abusive behaviour while motivating people to contribute to the sustainability of our platform. Here's an overview:
@@ -326,13 +344,13 @@ Our platform has multiple limits to prevent abusive behaviour while motivating p
 #### Global limits
 These limits apply per IP address for all Globalping users:
 
-- 100 POST requests per minute per IP. No GET limits are implemented to support "real-time" use cases.
+- 100 `POST` requests a minute per IP. No `GET` limits are implemented to support "real-time" use cases.
+
 - A single measurement is limited to 200 probes per location and 500 total probes.
 
 #### Unauthenticated users
 Anyone can connect to and use our API without requiring any credentials.
 For users without authentication, we limit the number of tests an IP address can run:
-
 - 100 tests per hour
 
 >[!note]
@@ -340,7 +358,6 @@ For users without authentication, we limit the number of tests an IP address can
 
 #### Registered jsDelivr users – Free
 All registered jsDelivr users get an API key for authentication, granting them higher limits:
-
 - 200 tests per hour
 
 #### GitHub Sponsors
@@ -348,13 +365,13 @@ As a GitHub Sponsor of jsDelivr, your contributions help us continue the develop
 
 As a thanks, we upgrade your account to receive higher limits.
 
-#### Custom limits
+### Custom limits
 Feel free to reach out if you need a custom limit for your API key.
 
 We're happy to provide higher limits for researchers, non-profits, and other open-source projects.
 
-## Support and feedback
+#### Support and feedback
 If you are stuck or want to give us your feedback, please [open a new issue](https://github.com/jsdelivr/globalping/issues).
 
-## Development
-Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+##### Contributors 
+Please refer to [`CONTRIBUTING.md`](CONTRIBUTING.md) for further information
